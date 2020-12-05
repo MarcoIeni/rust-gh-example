@@ -62,9 +62,20 @@ jobs:
           fi
       - name: Releasing assets
         uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           files: |
             target/${{ matrix.job.target }}/release/rust-gh-example-*.tar.gz
             target/${{ matrix.job.target }}/release/rust-gh-example-*.sha256
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          body: |
+            ## Changes
+
+            See CHANGELOG.md
+
+            ## Which release should I download?
+
+            | linux-x86_64   | 64-bit Linux   |
+            | windows-x86_64 | 64-bit Windows |
+            | macos-x86_64   | 64-bit macOS   |
+
